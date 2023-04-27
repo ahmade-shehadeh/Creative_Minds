@@ -39,7 +39,7 @@ const DashboardProvider = () => {
   }
   const getRate = () =>{
     axios
-    .get(`http://localhost:5000/review/`,{headers: {Authorization: state.token}})
+    .get(`https://creative-minds-s3x9.onrender.com/review/`,{headers: {Authorization: state.token}})
     .then((result)=>{
       fillterRate(result.data.Reviews)
     })
@@ -115,7 +115,7 @@ const DashboardProvider = () => {
   const getAllOrder = () =>{
     console.log(state.userId);
     axios
-    .get(`http://localhost:5000/orders/${state.userId}`, {headers: {Authorization: state.token}})
+    .get(`https://creative-minds-s3x9.onrender.com/orders/${state.userId}`, {headers: {Authorization: state.token}})
     .then((result)=>{
       setOrders(result.data.order)
       descOrder(result.data.order)
@@ -135,7 +135,7 @@ const DashboardProvider = () => {
 
   // const getAllOrder = () => {
   //   axios
-  //     .get(`http://localhost:5000/orders/${state.userId}`, {
+  //     .get(`https://creative-minds-s3x9.onrender.com/orders/${state.userId}`, {
   //       headers: { Authorization: state.token },
   //     })
   //     .then((result) => {

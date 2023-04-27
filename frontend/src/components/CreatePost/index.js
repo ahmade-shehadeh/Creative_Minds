@@ -56,7 +56,7 @@ const CreatePost = () => {
     console.log(title, description, pricing,state.token);
     axios
       .post(
-        `http://localhost:5000/posts`,
+        `https://creative-minds-s3x9.onrender.com/posts`,
         { title, description, pricing, post_image: url },
         {
           headers: {

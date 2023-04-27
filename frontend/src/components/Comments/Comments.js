@@ -33,7 +33,7 @@ const Comments = () => {
   const mood = state.mood;
   const getComment = (id) => {
     axios
-      .get(`http://localhost:5000/comments/${id}`, {
+      .get(`https://creative-minds-s3x9.onrender.com/comments/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -49,7 +49,7 @@ const Comments = () => {
   const CreateComment = (receiver_user_id) => {
     axios
       .post(
-        `http://localhost:5000/comments/${receiver_user_id}`,
+        `https://creative-minds-s3x9.onrender.com/comments/${receiver_user_id}`,
         { description: description },
         {
           headers: {
@@ -70,7 +70,7 @@ const Comments = () => {
   };
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:5000/comments/${id}`, {
+      .delete(`https://creative-minds-s3x9.onrender.com/comments/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -91,7 +91,7 @@ const Comments = () => {
   const updateComment = (id) => {
     axios
       .put(
-        `http://localhost:5000/comments/${id}`,
+        `https://creative-minds-s3x9.onrender.com/comments/${id}`,
         { description: description },
         {
           headers: {

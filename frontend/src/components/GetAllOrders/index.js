@@ -18,7 +18,7 @@ const GetAllOrders = () => {
   useEffect(()=>{
     axios
     .get(
-      `http://localhost:5000/orders/${state.userId}`,
+      `https://creative-minds-s3x9.onrender.com/orders/${state.userId}`,
       {
         headers: {
           Authorization: localStorage.getItem("token"),

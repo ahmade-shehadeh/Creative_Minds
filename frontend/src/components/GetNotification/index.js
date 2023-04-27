@@ -20,7 +20,7 @@ const GetAllNotification = () => {
 
     const getNotifications = ()=>{
         axios
-        .get(`http://localhost:5000/notifications`,{headers: {
+        .get(`https://creative-minds-s3x9.onrender.com/notifications`,{headers: {
             Authorization: state.token
             }})
         .then((result)=>{
@@ -36,11 +36,11 @@ const GetAllNotification = () => {
     },[])
     const createNotivication = (order_id,description,status)=>{
         axios
-        .get(`http://localhost:5000/orders/order_id/${order_id}`)
+        .get(`https://creative-minds-s3x9.onrender.com/orders/order_id/${order_id}`)
         .then((result)=>{
             console.log(result);
             axios
-            .post(`http://localhost:5000/notifications/${order_id}`,{description:description,status:status,receiver_user_id:result.data.order[0].requester_user_id})
+            .post(`https://creative-minds-s3x9.onrender.com/notifications/${order_id}`,{description:description,status:status,receiver_user_id:result.data.order[0].requester_user_id})
             .then((result)=>{console.log(result);})
             .catch((err)=>{console.log(err);})
 
@@ -49,13 +49,13 @@ const GetAllNotification = () => {
         }
     const updateNotificationFn = (id,status) => {
         axios
-        .put(`http://localhost:5000/notifications/${id}`,{status:status})
+        .put(`https://creative-minds-s3x9.onrender.com/notifications/${id}`,{status:status})
         .then((result)=>{console.log(result);})
         .catch((err)=>{console.log(err);})
     }
     const updateOrderState = (order_id,state_id) => {
         axios
-        .put(`http://localhost:5000/orders/state/${order_id}`,{state_id},{headers: {
+        .put(`https://creative-minds-s3x9.onrender.com/orders/state/${order_id}`,{state_id},{headers: {
             Authorization: state.token
         }})
         .then((result)=>{
@@ -67,11 +67,11 @@ const GetAllNotification = () => {
     }
     const RateFn = (rate,receiver_user_id,order_id,idNoti)=>{
         axios
-        .get(`http://localhost:5000/orders/order_id/${order_id}`)
+        .get(`https://creative-minds-s3x9.onrender.com/orders/order_id/${order_id}`)
         .then((result)=>{
             console.log(result);
             axios
-            .post(`http://localhost:5000/review`,{rate,receiver_user_id:result.data.order[0].receiver_user_id,order_id},{headers: {
+            .post(`https://creative-minds-s3x9.onrender.com/review`,{rate,receiver_user_id:result.data.order[0].receiver_user_id,order_id},{headers: {
             Authorization: state.token
             }})
             .then((result)=>{

@@ -27,7 +27,7 @@ const UserPost = () => {
 
   const getUserPosts = () => {
     axios
-      .get(`http://localhost:5000/posts/${state.userId}`, {
+      .get(`https://creative-minds-s3x9.onrender.com/posts/${state.userId}`, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
@@ -42,7 +42,7 @@ const UserPost = () => {
 
   const deleteSelectedPost = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}`, {
+      .delete(`https://creative-minds-s3x9.onrender.com/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
@@ -59,7 +59,7 @@ const UserPost = () => {
 
   const updateSelectedPost = (id) => {
     axios
-      .put(`http://localhost:5000/posts/${id}`,{ title, description } ,{
+      .put(`https://creative-minds-s3x9.onrender.com/posts/${id}`,{ title, description } ,{
         headers: {
           Authorization: `Bearer ${state.token}`,
         },

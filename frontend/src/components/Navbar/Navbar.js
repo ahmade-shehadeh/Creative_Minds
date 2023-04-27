@@ -33,7 +33,7 @@ const Navbars = () => {
   let newTheme = moodstate ? "lightMood" : "darkMood";
   const getImage = ()=>{
     axios
-      .get(`http://localhost:5000/users/`,{headers:{Authorization: state.token}})
+      .get(`https://creative-minds-s3x9.onrender.com/users/`,{headers:{Authorization: state.token}})
       .then((result)=>{
         setCraft(result.data.user[0].craft_id);
         setImageP(result.data.user[0].user_image);

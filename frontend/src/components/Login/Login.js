@@ -36,7 +36,7 @@ const Login = () => {
     };
 
     axios
-      .post("http://localhost:5000/users/login", user)
+      .post("https://creative-minds-s3x9.onrender.com/users/login", user)
       .then((result) => {
         console.log(result.data);
 

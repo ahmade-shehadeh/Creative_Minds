@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
   const getAllPosts = () => {
     axios
-      .get("http://localhost:5000/posts/")
+      .get("https://creative-minds-s3x9.onrender.com/posts/")
       .then((res) => {
         dispatch(setPost(res.data.posts));
       })

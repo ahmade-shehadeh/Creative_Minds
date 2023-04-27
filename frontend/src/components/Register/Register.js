@@ -83,7 +83,7 @@ console.log(newUser);
     
       try{
         const result= await axios
-      .post("http://localhost:5000/users/register", newUser)
+      .post("https://creative-minds-s3x9.onrender.com/users/register", newUser)
         console.log(result.data);
         tologin()
       }

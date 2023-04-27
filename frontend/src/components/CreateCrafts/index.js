@@ -21,7 +21,7 @@ const CreateCraft = () => {
   console.log(state.userInfo);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/crafts/")
+      .get("https://creative-minds-s3x9.onrender.com/crafts/")
       .then((result) => {
         dispatch(setCrafts(result.data.result));
       })
@@ -34,7 +34,7 @@ const CreateCraft = () => {
     console.log(craft);
     axios
       .put(
-        `http://localhost:5000/crafts/${state.userId}`,
+        `https://creative-minds-s3x9.onrender.com/crafts/${state.userId}`,
         { craft_id: craft.id },
         {
           headers: {

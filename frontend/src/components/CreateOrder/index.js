@@ -19,7 +19,7 @@ const CreateOrder = () =>{
     const getPostById = ()=>{
         // console.log(location);
         axios
-        .get(`http://localhost:5000/posts/post/${location.state.id}`)
+        .get(`https://creative-minds-s3x9.onrender.com/posts/post/${location.state.id}`)
         .then((result)=>{
             setPostInfo(result.data.posts[0])
         })
@@ -32,7 +32,7 @@ const CreateOrder = () =>{
     },[])
     const submitFn = ()=>{
         axios
-        .post(`http://localhost:5000/orders`,{schedule_date,order_desc,receiver_user_id:postInfo.user_id},{headers: {
+        .post(`https://creative-minds-s3x9.onrender.com/orders`,{schedule_date,order_desc,receiver_user_id:postInfo.user_id},{headers: {
             Authorization: state.token
             }})
         .then((result)=>{
@@ -50,7 +50,7 @@ const CreateOrder = () =>{
       
         let newTime =order_schedule.split("T").splice(0,1)
         axios
-        .post(`http://localhost:5000/notifications/${order_id}`,{description:`description:${order_desc} time:${newTime}`,status:"create_order",receiver_user_id:location.state.user_id})
+        .post(`https://creative-minds-s3x9.onrender.com/notifications/${order_id}`,{description:`description:${order_desc} time:${newTime}`,status:"create_order",receiver_user_id:location.state.user_id})
         .then((result)=>{console.log(result);})
         .catch((err)=>{console.log(err);})
     }
