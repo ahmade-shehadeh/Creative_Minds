@@ -1,0 +1,90 @@
+/* #D5E2F2  #e7ecf8  #B4C4D9 #8FA4BF */
+.container_dashboard_provider{
+    display: grid;
+    grid-template-columns: 15% 83%;
+    margin: 0.5%;
+    height: 100vh;
+}
+.ChartComponent{
+    width: 80%;
+    margin-left: 6%;
+    margin-top: 10%;
+}
+.ChartComponent1{
+    width: 100%;
+    text-align: center;
+    margin-left: 15%;
+    height: 40vh;
+}
+.display-flex{
+    display: flex;
+}
+.menu{
+    background-color: #F5F5F5;
+    border-radius: 25px;
+}
+.body_container{
+    /* background-color: #e7ecf8; */
+    margin: 0.5%;
+    margin-top: 0;
+    border-radius: 40px;
+    
+}
+
+.order_info__cotainer_div{
+    display: flex;
+    
+}
+.card_order_info{
+    margin: 3%;
+    width: 30%;
+    height: 20vh;
+    /* background-color: rgb(197, 229, 240); DCEBFC*/
+    background-color: #DCEBFC; 
+    border-radius: 35px;
+    padding: 1%;
+}
+.card_order_info:hover {
+    transform: rotateY(10deg);
+}
+.go_to{
+    /* background-color: #DCEBFC; */
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    font-size: 35px;
+}
+h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.number-order{
+    font-size: 80px;
+    margin-top: 8%;
+    
+}
+.light-red{
+    background-color: rgb(211, 211, 255);
+}
+.light-green{
+    background-color: #c3e6e1;
+}
+.light-blue{
+    background-color: rgb(251, 175, 175);
+}
+.ChartComponent-div{
+    height: 60vh;
+}
+.hr2{
+    
+    border: none;
+    border-top: 2px solid gray;
+    height: 1px;
+    /* margin: 20px 0; */
+    width: 95%;
+    margin-left: 2.5%;
+}
+.h2{
+    text-align: left;
+    margin-left: 27%;
+}

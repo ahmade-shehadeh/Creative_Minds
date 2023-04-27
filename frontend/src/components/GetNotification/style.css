@@ -1,0 +1,39 @@
+.notification{
+    background-color: lightblue;
+    margin: 5%;
+}
+.display_flex{
+  display: flex;
+}
+.each_noti{
+  margin-left: 1%;
+  margin-bottom: 1%;
+}
+.rating {
+    font-size: 0;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .star {
+    display: inline-block;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .star:before {
+    content: "\2605";
+  }
+  
+  .star:hover:before,
+  .star:hover ~ .star:before,
+  .star.active:before {
+    color: #FFD700;
+  }
+  .button_noti{
+    background-color:rgb(6, 157, 208);
+    border-radius: 10px;
+    margin: 1%;
+    /* margin-left: 0; */
+  }

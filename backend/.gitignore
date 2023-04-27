@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+node_modules
+.env/
+.env
+db.texst/
+package-lock.json 
+package-lock.json/
+

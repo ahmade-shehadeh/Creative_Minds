@@ -1,0 +1,19 @@
+.navBar-container{
+  background-color: #e2e0e0;
+  margin-bottom: 1%;
+}
+.leeft-margin-search{
+  margin-left: 25vw;
+  width: 20vw;
+}
+.to-left{
+  display: right;
+  margin-left: 55%;
+}
+.test{
+
+  background-color: red;
+}
+.background-navbar{
+  padding: 0.5%;
+}

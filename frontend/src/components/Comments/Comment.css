@@ -1,0 +1,17 @@
+body{
+    background-color: var(--background);
+}
+.comment{
+    padding-bottom: 1vh;
+    color: var(--words);
+    background-color: var(--background);
+   border-radius: 12px;
+}
+.created_on {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+}
+.createComment {
+  display: flex;
+}
