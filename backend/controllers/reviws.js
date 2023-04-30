@@ -76,14 +76,14 @@ const getREviewsByOrder = (req, res) => {
     });
 };
 const getREviewsByuser = (req, res) => {
-  const userId = req.token.userId
+  const userId = req.token.userId;
   pool
     .query(`SELECT * FROM reviews WHERE receiver_user_id = ${userId}`)
     .then((result) => {
       res.status(200).json({
         success: true,
         mesasge: `get Reviews`,
-        Reviews: result.rows
+        Reviews: result.rows,
       });
     })
     .catch((err) => {

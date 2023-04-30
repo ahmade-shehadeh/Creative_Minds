@@ -66,9 +66,29 @@ const updateStatusNotifivationById = (req,res) => {
     })
   })
 }
-
+const deleteNotificationById = (req, res) =>{
+  const id =  req.params.id 
+  const queryString = `DELETE FROM notifications where id = ${id};`
+  pool
+    .query(queryString)
+    .then((result)=>{   
+      res.status(202).json({
+          success: true,
+          massage: `notification with id: ${id} deleted successfully`,
+          result:result.rows[0]
+      })
+  })
+  .catch((err)=>{
+      res.status(500).json({
+          success: false,
+          message: "Server error",
+          error : err
+      })              
+  })  
+} 
 module.exports={
     createNewNotification,
     getNotificationById,
-    updateStatusNotifivationById
+    updateStatusNotifivationById,
+    deleteNotificationById
 }

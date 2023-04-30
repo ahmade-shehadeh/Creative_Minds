@@ -1,5 +1,12 @@
 const pool = require("../models/db");
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+const client = require("twilio")(accountSid, authToken)
+
+
+
 const createNewOrder = (req,res) => {
     const requester_user_id = req.token.userId
     const {schedule_date,order_desc,receiver_user_id} = req.body
@@ -63,6 +70,25 @@ const getOrderByReceiverId = (req,res) => {
         });
       });
 }
+const getOrderByRequesterId = (req,res) => {
+  const query=`SELECT * FROM orders WHERE requester_user_id = ${req.token.userId};`
+  pool
+  .query(query)
+  .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "order get successfuly",
+        order: result.rows
+      });
+    })
+    .catch((err) => {
+      res.status(409).json({
+        success: false,
+        message: "* server error *",
+        err:err.message,
+      });
+    });
+}
 const getAllOrder = (req,res) => {
     const query=`SELECT * FROM orders`
     pool
@@ -123,6 +149,30 @@ const updateStateOrderById = (req,res) => {
       });
     });
 }
+
+
+const sendUserOrederBooking = (req, res) =>{
+  const{ schedule_date } =  req.body
+  client.messages
+  .create({
+     body: `you have an order booked on day ${schedule_date}`,
+     from: '+15403849963',
+     to: '+962779582933'
+   })
+  .then((res)=>{
+    res.status(200).json({
+      success : true,
+      message : "message has been sent successfuly",
+      result : res
+    })
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      success : false,
+      message : "message hasn't been sent"
+    })
+  })
+}
 module.exports = {
     createNewOrder,
     updateOrderById,
@@ -130,4 +180,6 @@ module.exports = {
     getAllOrder,
     getOrderById,
     updateStateOrderById,
+    sendUserOrederBooking,
+    getOrderByRequesterId
 }

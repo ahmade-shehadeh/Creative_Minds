@@ -13,7 +13,7 @@ const {
 const postsRouter = express.Router();
 
 postsRouter.post('/',authentication,createNewPost)
-postsRouter.get('/user/:user_id',getPostsByuser)
+postsRouter.get('/user/myposts',authentication,getPostsByuser)
 postsRouter.put('/:postId',authentication,updatePostById)
 postsRouter.delete("/:id", authentication, deletePostById)
 postsRouter.get('/',getAllPosts)
