@@ -74,7 +74,7 @@ const UpdateUser = () => {
   };
 useEffect(() => {
   axios
-  .get("https://creative-minds-s3x9.onrender.com/crafts/")
+  .get("https://taslee7-com.onrender.com/crafts/")
   .then((result) => {
     console.log(result.data.result);
    setCrafts(result.data.result);
@@ -99,7 +99,7 @@ useEffect(() => {
 
     try {
       const result = await axios.post(
-        "https://creative-minds-s3x9.onrender.com/users/register",
+        "https://taslee7-com.onrender.com/users/register",
         newUser,
         {
           headers: {

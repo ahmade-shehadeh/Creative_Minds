@@ -70,7 +70,7 @@ const UpdateProfile = () => {
 
   const updateFn = (url2) => {
     axios.put(
-      "https://creative-minds-s3x9.onrender.com/users/updateUser",
+      "https://taslee7-com.onrender.com/users/updateUser",
       { first_name, last_name, phone_no, user_image: url2 },
       { headers: { Authorization: state.token } }
     );

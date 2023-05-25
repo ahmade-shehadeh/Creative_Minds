@@ -41,7 +41,7 @@ const UserPosts = () => {
 
   const getUserPosts = () => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/user/myposts`, {
+      .get(`https://taslee7-com.onrender.com/posts/user/myposts`, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
@@ -57,7 +57,7 @@ const UserPosts = () => {
   const deleteSelectedPost = (id) => {
     
     axios
-      .delete(`https://creative-minds-s3x9.onrender.com/posts/${id}`, {
+      .delete(`https://taslee7-com.onrender.com/posts/${id}`, {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
@@ -75,7 +75,7 @@ const UserPosts = () => {
 
   const updateSelectedPost = (id) => {
     axios
-      .put(`https://creative-minds-s3x9.onrender.com/posts/${id}`,{ title, description } ,{
+      .put(`https://taslee7-com.onrender.com/posts/${id}`,{ title, description } ,{
         headers: {
           Authorization: `Bearer ${state.token}`,
         },

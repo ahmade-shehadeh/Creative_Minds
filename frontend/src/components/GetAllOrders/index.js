@@ -23,7 +23,7 @@ const GetAllOrders = () => {
   });
   useEffect(() => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/orders/${state.userId}`, {
+      .get(`https://taslee7-com.onrender.com/orders/${state.userId}`, {
         headers: {
           Authorization: state.token,
         },

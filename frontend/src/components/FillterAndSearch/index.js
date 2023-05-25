@@ -39,7 +39,7 @@ const Home = () => {
   });
   const Desc = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/fillter/desc`)
+      .get(`https://taslee7-com.onrender.com/posts/fillter/desc`)
       .then((res) => {
         dispatch(setPost(res.data.posts));
       })
@@ -49,7 +49,7 @@ const Home = () => {
   };
   const asc = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/fillter/asc`)
+      .get(`https://taslee7-com.onrender.com/posts/fillter/asc`)
       .then((res) => {
         dispatch(setPost(res.data.posts));
       })
@@ -59,7 +59,7 @@ const Home = () => {
   };
   const date = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/fillter/date`)
+      .get(`https://taslee7-com.onrender.com/posts/fillter/date`)
       .then((res) => {
         dispatch(setPost(res.data.posts));
       })
@@ -69,7 +69,7 @@ const Home = () => {
   };
   const search = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/search/${textSearch}`)
+      .get(`https://taslee7-com.onrender.com/posts/search/${textSearch}`)
       .then((res) => {
     console.log(res.data.posts);
     dispatch(setPost(res.data.posts));

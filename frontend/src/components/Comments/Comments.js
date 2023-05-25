@@ -35,7 +35,7 @@ const Comments = (s) => {
 
   const getComment = () => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/comments/${userpostId}`, {
+      .get(`https://taslee7-com.onrender.com/comments/${userpostId}`, {
         headers: { Authorization: state.token },
       })
       .then((result) => {
@@ -47,7 +47,7 @@ const Comments = (s) => {
   };
   const deleteComment = (id) => {
     axios
-      .delete(`https://creative-minds-s3x9.onrender.com/comments/${id}`, {
+      .delete(`https://taslee7-com.onrender.com/comments/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -68,7 +68,7 @@ const Comments = (s) => {
   const updateComment = (id) => {
     axios
       .put(
-        `https://creative-minds-s3x9.onrender.com/comments/${id}`,
+        `https://taslee7-com.onrender.com/comments/${id}`,
         { description: description },
         {
           headers: {

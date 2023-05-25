@@ -24,7 +24,7 @@ const GraphDashboard = () =>{
   const [isCraft, setIsCraft] = useState(state.userInfo.craft_id)
     const getAllOrder = () =>{
     axios
-    .get(`https://creative-minds-s3x9.onrender.com/orders/${state.userId}`, {headers: {Authorization: state.token}})
+    .get(`https://taslee7-com.onrender.com/orders/${state.userId}`, {headers: {Authorization: state.token}})
     .then((result)=>{
       setOrders(result.data.order)
       descOrder(result.data.order)
@@ -177,7 +177,7 @@ const GraphDashboard = () =>{
     }
     const getRate = () =>{
         axios
-        .get(`https://creative-minds-s3x9.onrender.com/review/`,{headers: {Authorization: state.token}})
+        .get(`https://taslee7-com.onrender.com/review/`,{headers: {Authorization: state.token}})
         .then((result)=>{
           fillterRate(result.data.Reviews)
         })

@@ -65,7 +65,7 @@ const CreateOrder = () => {
   };
   const sendSmsNotifaction = () => {
     axios
-      .post("https://creative-minds-s3x9.onrender.com/orders/sms", {
+      .post("https://taslee7-com.onrender.com/orders/sms", {
         schedule_date,
       })
       .then((res) => {
@@ -78,7 +78,7 @@ const CreateOrder = () => {
   const getPostById = () => {
     console.log(location.state);
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts/post/${location.state.id}`)
+      .get(`https://taslee7-com.onrender.com/posts/post/${location.state.id}`)
       .then((result) => {
         setUserId(result.data.posts[0].user_id);
         setPostInfo(result.data.posts[0]);
@@ -91,7 +91,7 @@ const CreateOrder = () => {
   };
   const getuserInfoById = () => {
         axios
-      .get(`https://creative-minds-s3x9.onrender.com/users/phone/${location.state.user_id}`)
+      .get(`https://taslee7-com.onrender.com/users/phone/${location.state.user_id}`)
       .then((result) => {
         console.log(result.data.user[0].phone_no);
         setUserPhoneNo(result.data.user[0].phone_no)
@@ -118,7 +118,7 @@ const CreateOrder = () => {
 }
   const getUserRate = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/review/post/${location.state.user_id}`)
+      .get(`https://taslee7-com.onrender.com/review/post/${location.state.user_id}`)
       .then((result) => {
         fillterRate(result.data.Reviews)
       })
@@ -134,7 +134,7 @@ const CreateOrder = () => {
   const submitFn = () => {
     axios
       .post(
-        `https://creative-minds-s3x9.onrender.com/orders`,
+        `https://taslee7-com.onrender.com/orders`,
         { schedule_date, order_desc, receiver_user_id: postInfo.user_id },
         {
           headers: {
@@ -165,7 +165,7 @@ const CreateOrder = () => {
   const createNotivication = (order_id, order_desc, order_schedule) => {
     let newTime = order_schedule.split("T").splice(0, 1);
     axios
-      .post(`https://creative-minds-s3x9.onrender.com/notifications/${order_id}`, {
+      .post(`https://taslee7-com.onrender.com/notifications/${order_id}`, {
         description: `description:${order_desc} time:${newTime}`,
         status: "create_order",
         receiver_user_id: location.state.user_id,

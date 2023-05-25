@@ -25,7 +25,7 @@ const GetAllOrdersRequester = () => {
   useEffect(()=>{
     axios
     .get(
-      `https://creative-minds-s3x9.onrender.com/orders/my_order`,
+      `https://taslee7-com.onrender.com/orders/my_order`,
       {
         headers: {
           Authorization: state.token,

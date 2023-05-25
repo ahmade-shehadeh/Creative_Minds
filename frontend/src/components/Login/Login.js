@@ -43,10 +43,10 @@ const Login = () => {
     };
 
     axios
-      .post("https://creative-minds-s3x9.onrender.com/users/login", user)
+      .post("https://taslee7-com.onrender.com/users/login", user)
       .then((result) => {
         axios
-          .get(`https://creative-minds-s3x9.onrender.com/notifications`, {
+          .get(`https://taslee7-com.onrender.com/notifications`, {
             headers: {
               Authorization: result.data.token,
             },

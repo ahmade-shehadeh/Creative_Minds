@@ -37,7 +37,7 @@ const Home = () => {
   const getAllPosts = (page, limit) => {
     
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/posts?page=${page}&limit=${limit}`)
+      .get(`https://taslee7-com.onrender.com/posts?page=${page}&limit=${limit}`)
       .then((res) => {
           
           dispatch(setPost(res.data.posts));

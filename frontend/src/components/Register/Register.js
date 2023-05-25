@@ -92,7 +92,7 @@ function Register() {
 
     try {
       const result = await axios.post(
-        "https://creative-minds-s3x9.onrender.com/users/register",
+        "https://taslee7-com.onrender.com/users/register",
         newUser
       );
       console.log(result.data);

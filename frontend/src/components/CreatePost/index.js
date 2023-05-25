@@ -67,7 +67,7 @@ const CreatePost = () => {
   const submitFn = () => {
     axios
       .post(
-        `https://creative-minds-s3x9.onrender.com/posts`,
+        `https://taslee7-com.onrender.com/posts`,
         { title, description, pricing, post_image: url },
         {
           headers: {

@@ -53,7 +53,7 @@ const Navbars = () => {
   let newTheme = moodstate ? "lightMood" : "darkMood";
   const notificationsCountApi = ()=>{
     axios
-          .get(`https://creative-minds-s3x9.onrender.com/notifications`, {
+          .get(`https://taslee7-com.onrender.com/notifications`, {
             headers: {
               Authorization: state.token,
             },

@@ -30,7 +30,7 @@ const CreateCraft = () => {
   });
   useEffect(() => {
     axios
-      .get("https://creative-minds-s3x9.onrender.com/crafts/")
+      .get("https://taslee7-com.onrender.com/crafts/")
       .then((result) => {
         dispatch(setCrafts(result.data.result));
       })
@@ -42,7 +42,7 @@ const CreateCraft = () => {
   const submitFn = () => {
     axios
       .put(
-        `https://creative-minds-s3x9.onrender.com/crafts/${state.userId}`,
+        `https://taslee7-com.onrender.com/crafts/${state.userId}`,
         { craft_id: craft.id },
         {
           headers: {

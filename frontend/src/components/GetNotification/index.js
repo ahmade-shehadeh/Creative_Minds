@@ -33,7 +33,7 @@ const GetAllNotification = () => {
 console.log(isCraft);
   const getNotifications = () => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/notifications`, {
+      .get(`https://taslee7-com.onrender.com/notifications`, {
         headers: {
           Authorization: token,
         },
@@ -48,11 +48,11 @@ console.log(isCraft);
 
   const createNotivication = (order_id, description, status) => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/orders/order_id/${order_id}`)
+      .get(`https://taslee7-com.onrender.com/orders/order_id/${order_id}`)
       .then((result) => {
         console.log(result);
         axios
-          .post(`https://creative-minds-s3x9.onrender.com/notifications/${order_id}`, {
+          .post(`https://taslee7-com.onrender.com/notifications/${order_id}`, {
             description: description,
             status: status,
             receiver_user_id: result.data.order[0].requester_user_id,
@@ -71,7 +71,7 @@ console.log(isCraft);
 
   const deleteNotificationFn = (id, status) => {
     axios
-      .delete(`https://creative-minds-s3x9.onrender.com/notifications/${id}`)
+      .delete(`https://taslee7-com.onrender.com/notifications/${id}`)
       .then((result) => {
         console.log(result);
         dispatch(cancelNotification(id));
@@ -84,7 +84,7 @@ console.log(isCraft);
   const updateOrderState = (order_id, state_id) => {
     axios
       .put(
-        `https://creative-minds-s3x9.onrender.com/orders/state/${order_id}`,
+        `https://taslee7-com.onrender.com/orders/state/${order_id}`,
         { state_id },
         {
           headers: {
@@ -102,12 +102,12 @@ console.log(isCraft);
 
   const RateFn = (rate, receiver_user_id, order_id, idNoti) => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/orders/order_id/${order_id}`)
+      .get(`https://taslee7-com.onrender.com/orders/order_id/${order_id}`)
       .then((result) => {
         console.log(result);
         axios
           .post(
-            `https://creative-minds-s3x9.onrender.com/review`,
+            `https://taslee7-com.onrender.com/review`,
             {
               rate,
               receiver_user_id: result.data.order[0].receiver_user_id,
@@ -138,7 +138,7 @@ console.log(isCraft);
   const CreateComment = (receiver_user_id) => {
     axios
       .post(
-        `https://creative-minds-s3x9.onrender.com/comments/${receiver_user_id}`,
+        `https://taslee7-com.onrender.com/comments/${receiver_user_id}`,
         { description: description },
         {
           headers: {
