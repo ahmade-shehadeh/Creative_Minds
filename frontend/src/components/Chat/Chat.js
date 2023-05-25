@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import openai from 'openai'
 import os from 'os'
+require('dotenv').config();
 const Chat = () => {
   const state = useSelector((state) => {
     return {
@@ -14,7 +15,7 @@ const Chat = () => {
  const [content, setContent] = useState("");
   const [output, setOutput] = useState("");
   const ChatNow = async () => {
-    const apiKey = openai.api_key = os.environ["OPENAI_API_KEY"]
+    const apiKey = process.env.API_KEY
     const requset = {
       model: "gpt-3.5-turbo",
       messages: [
