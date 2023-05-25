@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import "./Chat.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import openai from 'openai'
+import os from 'os'
 const Chat = () => {
   const state = useSelector((state) => {
     return {
@@ -12,7 +14,7 @@ const Chat = () => {
  const [content, setContent] = useState("");
   const [output, setOutput] = useState("");
   const ChatNow = async () => {
-    const apiKey = "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";
+    const apiKey = openai.api_key = os.environ["OPENAI_API_KEY"]
     const requset = {
       model: "gpt-3.5-turbo",
       messages: [
