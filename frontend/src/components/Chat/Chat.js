@@ -12,7 +12,7 @@ const Chat = () => {
  const [content, setContent] = useState("");
   const [output, setOutput] = useState("");
   const ChatNow = async () => {
-    const apiKey = "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";
+    const apiKey = "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";
     const requset = {
       model: "gpt-3.5-turbo",
       messages: [
