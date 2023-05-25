@@ -1,0 +1,69 @@
+.container-profile {
+  height: 100vh;
+  margin-top: 3%;
+  margin-bottom: 10%;
+}
+.card-profile {
+  width: 40%;
+  margin-left: 30%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-header-profile {
+  background-color: #223d66;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header-title-profile {
+  margin: 0;
+  font-size: 2rem;
+  font-family: system-ui;
+}
+
+.card-body-profile {
+  padding: 10px;
+}
+.form-group-profile {
+  margin-bottom: 10px;
+}
+
+.label-profile {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+}
+.input-profile {
+  font-size: 1rem;
+  padding: 10px;
+  width: 100%;
+  border-radius: 20px;
+  border: none;
+  background-color: #e1f0f8;
+}
+small {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+}
+.button-profile {
+  background-color: #223d66;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.button-profile {
+  background-color: #223d66;
+}
+
+.updateimg {
+  margin-left: 8vw;
+}

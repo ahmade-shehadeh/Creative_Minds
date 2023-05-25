@@ -2,67 +2,44 @@ import React, { useEffect, useState } from "react";
 import "./Comment.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { setPooster } from "../Redux/reducers/auth";
+import Card from "react-bootstrap/Card";
 import {
   MDBCard,
   MDBCardBody,
   MDBCardImage,
   MDBCol,
   MDBContainer,
-  MDBRow,
+  MDBIcon,
   MDBInput,
+  MDBRow,
 } from "mdb-react-ui-kit";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import Button from "react-bootstrap/Button";
-import IosShareIcon from "@mui/icons-material/IosShare";
-import ReplyIcon from "@mui/icons-material/Reply";
-import IosShareOutlinedIcon from "@mui/icons-material/IosShareOutlined";
-const Comments = () => {
+const Comments = (s) => {
   const state = useSelector((state) => {
     return {
       token: state.auth.token,
       userInfo: state.auth.userInfo,
       userId: state.auth.userId,
       mood: state.Mood.mood,
+      user_image: state.auth.user_image,
+      pooster: state.auth.pooster,
+      userpostId: state.comments.userpostId,
     };
   });
   const [comments, setComments] = useState([]);
   const [description, setDescription] = useState("");
-  const [update, setUpdate] = useState(false);
+  const [userpostId, setUserpostId] = useState(state.userpostId);
   const token = state.token;
-  const userId = state.userId;
-  const mood = state.mood;
-  const getComment = (id) => {
+  const userId = state.value;
+  const user_image = state.user_image;
+
+  const getComment = () => {
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/comments/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+      .get(`https://creative-minds-s3x9.onrender.com/comments/${userpostId}`, {
+        headers: { Authorization: state.token },
       })
       .then((result) => {
-        // console.log(result.data.result);
         setComments(result.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const CreateComment = (receiver_user_id) => {
-    axios
-      .post(
-        `https://creative-minds-s3x9.onrender.com/comments/${receiver_user_id}`,
-        { description: description },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((result) => {
-        // console.log(result.data.result);
-        const newresult = result.data.result[0];
-        const newComment = [...comments, newresult];
-        console.log(newComment);
-        setComments(newComment);
       })
       .catch((err) => {
         console.log(err);
@@ -114,128 +91,73 @@ const Comments = () => {
       });
   };
   useEffect(() => {
-    getComment(3);
+    getComment();
   }, []);
-
   return (
-    <div>
-      <MDBContainer className="mt-5" style={{ maxWidth: "1000px" }}>
+    <div className="all-orders-div" style={{ marginLeft: "0"}}>
+      <MDBContainer
+        className="mt-5"
+        style={{ width: "100%", textAlign: "left" }}
+      >
         <MDBRow className="justify-content-center">
           <MDBCol md="8" lg="6">
             <MDBCard
               className="shadow-0 border"
-              style={{ backgroundColor: "#f0f2f5" }}
-            >
-              <MDBCardBody>
-                <div className="createComment">
-                  <MDBInput
-                    wrapperClass="mb"
-                    label="+ Add youer comment"
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setDescription(e.target.value);
-                    }}
-                  />
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      CreateComment(3);
-                    }}
-                  >
-                    <IosShareOutlinedIcon />{" "}
-                  </Button>
-                </div>
-                {comments &&
-                  comments.map((comment) => {
-                    return (
-                      <MDBCard className="mb-4" key={comment.id}>
-                        <div
-                          className={
-                            mood === "darkMood"
-                              ? "darkMood comment"
-                              : "lightMood comment"
-                          }
-                        >
-                          <MDBCardBody>
-                            <p>{comment.description}</p>
+              style={{
+                backgroundColor: "#223d66",
+                margin: "0",
+                textAlign: "left",
+                widows: "80%",
+                marginLeft: "10%",
 
-                            <div className="d-flex justify-content-between">
-                              <div className="d-flex flex-row align-items-center">
+              }}
+            >
+              {/* { console.log(comments.length)} */}
+                {comments.length >0 && comments.map((comment, i) => {
+                  if (comments.length != 0) {
+                    return (
+                      <div className="" key={i}>
+                        <div>
+                        <MDBCardBody>
+                          <MDBCard className="mb-4 cardOrderBody">
+                            <MDBCardBody>
+                              <div className="d-flex flex-col align-items-center comment2">
                                 <MDBCardImage
-                                  src="8c3925ac-3e1b-49ce-ac4c-1b9545a5d945.png"
+                                  src={comment.user_image}
                                   alt="avatar"
                                   width="25"
                                   height="25"
                                 />
-                                <p className="small mb-0 ms-2">
-                                  {state.userInfo.first_name}
+
+                                <p className="small mb-0 ms-2 comment3">
+                                  {comment.first_name} {comment.last_name}{" "}
                                 </p>
                               </div>
-
-                              <div className="d-flex flex-row align-items-center">
-                                <p className="small text-muted mb-4 created_on">
+                              <Card.Title>
+                                <p
+                                  className="small text-muted mb-0 comment2"
+                                  style={{ textAlign: "left" , fontSize :'18px',letterSpacing:'3px',
+                                margin: '5px'}}
+                                >
                                   {comment.created_on &&
                                     comment.created_on.split("").splice(0, 10)}
                                 </p>
-                              </div>
-                              <div className="small text-muted mb-4 created_on">
-                                {userId == comment.requester_user_id ? (
-                                  <>
-                                    <Button
-                                      variant="outline-danger"
-                                      size="sm"
-                                      onClick={() => {
-                                        deleteComment(comment.id);
-                                      }}
-                                    >
-                                      {<DeleteForeverOutlinedIcon />}
-                                    </Button>{" "}
-                                    <Button
-                                      variant="outline-warning"
-                                      size="sm"
-                                      onClick={() => {
-                                        setUpdate(!update);
-                                      }}
-                                    >
-                                      <ReplyIcon />
-                                    </Button>{" "}
-                                    {update ? (
-                                      <>
-                                        <MDBInput
-                                          wrapperClass="mb-4"
-                                          label="new comment"
-                                          id="formControlLg"
-                                          type="text"
-                                          size="sm"
-                                          onChange={(e) => {
-                                            setDescription(e.target.value);
-                                          }}
-                                        />{" "}
-                                        <Button
-                                          variant="outline-primary"
-                                          size="sm"
-                                          onClick={() => {
-                                            updateComment(comment.id);
-                                          }}
-                                        >
-                                          <IosShareIcon />
-                                        </Button>{" "}
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}{" "}
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            </div>
-                          </MDBCardBody>
-                        </div>
-                      </MDBCard>
-                    );
-                  })}
+                              </Card.Title>
+
+                              <p
+                                className="comment2"
+                                
+                              >
+                                {comment.description}
+                              </p>
+                            </MDBCardBody>
+                          </MDBCard>
               </MDBCardBody>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
             </MDBCard>
           </MDBCol>
         </MDBRow>

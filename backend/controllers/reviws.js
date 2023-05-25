@@ -94,9 +94,29 @@ const getREviewsByuser = (req, res) => {
       });
     });
 };
+const getREviewsByIduser = (req, res) => {
+  const userId = req.params.userId;
+  pool
+    .query(`SELECT * FROM reviews WHERE receiver_user_id = ${userId}`)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: `get Reviews`,
+        Reviews: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        err: err.message,
+      });
+    });
+};
 module.exports = {
   createNewReviews,
   updatestateById,
   getREviewsByOrder,
   getREviewsByuser,
+  getREviewsByIduser
 };

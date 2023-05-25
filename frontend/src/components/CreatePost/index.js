@@ -1,6 +1,6 @@
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState ,useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import {
@@ -15,9 +15,14 @@ import {
   MDBIcon,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { ToastContainer, toast } from "react-toastify";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
+ 
 const CreatePost = () => {
-  const fileInputRef =useRef()
+  const navigate = useNavigate();
+  const fileInputRef = useRef();
   const uploadImage = async (i) => {
     console.log(i);
     const data = new FormData();
@@ -49,11 +54,17 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [pricing, setPricing] = useState("");
-  const [image, setImage] = useState(" ");
-  
+  const [image, setImage] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const errorNotify = () => {
+    toast.error("please enter all required fildes");
+  };
 
   const submitFn = () => {
-    console.log(title, description, pricing,state.token);
     axios
       .post(
         `https://creative-minds-s3x9.onrender.com/posts`,
@@ -70,77 +81,51 @@ const CreatePost = () => {
       .catch((err) => {
         console.log(err);
       });
+      
   };
 
   return (
-    <div className="inpust-post">
-      <Form>
-        <Form.Group
-          className="mb-3"
-          controlId="exampleForm.ControlInput1"
-        ></Form.Group>
-
-        <Form.Group
-          className="mb-3"
-          controlId="exampleForm.ControlTextarea1"
-        ></Form.Group>
-      </Form>
-      <MDBContainer fluid>
-        <MDBCard
-          className={
-            mood === "darkMood"
-              ? "darkMood text-black m-5navbar"
-              : "lightMood text-black m-5navbar"
-          }
-          style={{ borderRadius: "25px" }}
-        >
-          <MDBCardBody>
-            <MDBRow>
+    <div className="inpust-post2" >
+      <MDBContainer fluid   >
+        <MDBCard style={{ borderRadius: "25px"}} >
+          <MDBCardBody className="bodyOfCreatOrder">
+            <MDBRow >
               <MDBCol
                 md="10"
-                lg="6"
+                lg="8"
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
+                // style={{backgroundColor:"#768aaa"}}
               >
-                <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas icon="fas fa-heading me-3" size="lg"
-                  className={
-                    mood === "darkMood"
-                      ? "darkMood"
-                      : "lightMood"
-                  } />
+                <div className="d-flex flex-row align-items-center mb-4 " >
+                  <MDBIcon
+                    fas
+                    icon="fas fa-heading me-3"
+                    size="lg"
+                    style={{color:'#2a4d69'}}
+                    
+
+                  />
                   <MDBInput
                     label="Title"
                     id="form1"
                     type="text"
-                    className={
-                      mood === "darkMood"
-                        ? "darkMood w-100"
-                        : "lightMood w-100"
-                    }
                     onChange={(e) => {
                       setTitle(e.target.value);
                     }}
                   />
                 </div>
                 <div className="d-flex flex-row align-items-center mb-4 ">
-                  <MDBIcon fas 
-                  icon="fas fa-highlighter me-3"
-                   size="lg"
-                   className={
-                    mood === "darkMood"
-                      ? "darkMood"
-                      : "lightMood"
-                  } />
+                  <MDBIcon
+                    fas
+                    icon="fas fa-highlighter me-3"
+                    size="lg"
+                    style={{color:'#2a4d69'}}
+
+                  />
                   <MDBInput
-                  className={
-                    mood === "darkMood"
-                      ? "darkMood w-100"
-                      : "lightMood w-100"
-                  }
                     label="Description"
                     id="form1"
                     type="text"
-                    
                     onChange={(e) => {
                       setDescription(e.target.value);
                     }}
@@ -151,74 +136,130 @@ const CreatePost = () => {
                     fas
                     icon=" fas fa-money-bill-1-wave me-3"
                     size="lg"
-                    className={
-                      mood === "darkMood"
-                        ? "darkMood"
-                        : "lightMood"
-                    }
+                    style={{color:'#2a4d69'}}
+
                   />
 
                   <MDBInput
                     label="Pricing"
                     id="form1"
                     type="text"
-                    className={
-                      mood === "darkMood"
-                        ? "darkMood w-100"
-                        : "lightMood w-100"
-                    }
-                    
+                   
                     onChange={(e) => {
                       setPricing(e.target.value);
                     }}
                   />
                 </div>
-                <div
-                  className="d-flex flex-row align-items-center mb-4"
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                  }}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setImage(e.dataTransfer.files[0]);
-                    uploadImage(e.dataTransfer.files[0]);
-                  }}
-                >
-                  <MDBIcon fas icon="camera-retro me-3" size="lg" 
-                  className={
-                    mood === "darkMood"
-                      ? "darkMood"
-                      : "lightMood"
-                  }/>
-                  <button className="imgbtn" onClick={(e) => { fileInputRef.current.click()}}>
-                    take image from your device
-                    <br></br>
-                    <MDBIcon fas size="lg" icon="plus-circle me-3" />
-                  </button>
-                  <MDBInput
-                    label=""
-                    id="form4"
-                    type="file"
-                    style={{ display: "none" }}
-                    ref={fileInputRef}
-                    onChange={(e) => {
-                      setImage(e.target.files[0]);
-                      uploadImage(e.target.files[0]);
+                {image ? (
+                  <img src={url} className="img" />
+                ) : (
+                  <div
+                    className="d-flex align-items-center mb-4"
+                    onDragOver={(e) => {
+                      e.preventDefault();
                     }}
-                  />
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setImage(e.dataTransfer.files[0]);
+                      uploadImage(e.dataTransfer.files[0]);
+                    }}
+                  >
+                    <MDBIcon
+                      fas
+                      icon="camera-retro me-3"
+                      size="lg"
+                      style={{color:'#2a4d69'}}
+                    />
+                    <button
+                      className="imgbtn"
+                      onClick={(e) => {
+                        fileInputRef.current.click();
+                      }}
+                      style={{color:'#2a4d69'}}
+                    >
+                      take image from your device
+                      <br></br>
+                      <MDBIcon fas size="lg" icon="plus-circle me-4"
+                      style={{color:'#2a4d69'}} />
+                    </button>
+                    <MDBInput
+                      label=""
+                      id="form4"
+                      type="file"
+                      style={{ display: "none" }}
+                      ref={fileInputRef}
+                      onChange={(e) => {
+                        setImage(e.target.files[0]);
+                        uploadImage(e.target.files[0]);
+                      }}
+                    />
+                  </div>
+                )}
+
+<div className="d-flex flex-row align-items-center mb-4">
+                  <MDBBtn
+                    className="mb-4"
+                    size="lg"
+                    style={{ 
+                      color: "white",
+                      backgroundColor: "#223d66",}}
+                    onClick={() => {
+                      setImage(null);
+                    }}
+                  >
+                    undo
+                  </MDBBtn>{" "}
+                  <MDBBtn
+                    className="mb-4"
+                    size="lg"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#223d66",
+                      marginLeft: "5px",
+                    }}
+                    onClick={(e) => {
+                      const value = title;
+                      const desValue = description;
+                      const price = pricing;
+                      const img = image;
+                      if (!value.trim() || !desValue.trim() || !price.trim()) {
+                        errorNotify();
+                      } else {
+                        handleShow();
+
+                        submitFn()
+                        navigate('/')
+                      }
+                    }}
+                  >
+                    Submit
+                  </MDBBtn>
                 </div>
-                ============================
-                <MDBBtn className={
-                      mood === "darkMood"
-                        ? "darkMood mb-4"
-                        : "lightMood mb-4"
-                    }size="lg" onClick={submitFn}>
-                  Submit
-                </MDBBtn>
               </MDBCol>
             </MDBRow>
           </MDBCardBody>
         </MDBCard>
+
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to post</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="success"
+            onClick={(e) => {
+              handleClose();
+              submitFn();
+            }}
+          >
+            Confirm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <ToastContainer/>
       </MDBContainer>
     </div>
   );

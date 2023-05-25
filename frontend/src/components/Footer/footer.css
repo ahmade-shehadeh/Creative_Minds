@@ -42,14 +42,14 @@ h6 {
 
 .footer {
   font-size: 14px;
-  background-color: var(--color-secondary);
-  padding: 50px 0;
+  background-color: #223d66;
+  padding: 5vh 0;
   color: white;
 }
 
 .footer .footer-info .logo {
   line-height: 0;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .footer .footer-info .logo img {
@@ -164,4 +164,8 @@ h6 {
 text-align: left;
 margin-left: 3vw;
 
+}
+.cursor{
+  cursor:pointer;
+color:white
 }

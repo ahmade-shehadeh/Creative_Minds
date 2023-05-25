@@ -1,98 +1,261 @@
-import "./Navbar.css"
-import { BsFillHouseFill,BsPersonCheckFill } from 'react-icons/bs';
+import "./Navbar.css";
 import { useEffect, useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { useSelector, useDispatch } from "react-redux";
-import { setLogout } from "../Redux/reducers/auth";
+import { setLogout, setNotification } from "../Redux/reducers/auth";
+import { setCounterNotification } from "../Redux/reducers/noti";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { BsFillHouseFill } from "react-icons/bs";
-
-
+import { FaBell } from "react-icons/fa";
+import { changeMood } from "../Redux/reducers/mood";
+import { setLanguage } from "../Redux/reducers/auth";
+import {
+  BsFillHouseGearFill,
+  BsFillBarChartFill,
+  BsChatDotsFill,
+  BsFillPlusSquareFill,
+  BsFillPlusCircleFill,
+  BsBoxArrowInLeft,
+  BsSpellcheck
+} from "react-icons/bs";
+import GetAllNotification from "../GetNotification";
 const Navbars = () => {
-  const [imageP,setImageP] = useState("")
-  const [craft,setCraft] = useState("")
   const [moodstate, setMoodstate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [notiShow, setNotiShow] = useState(false);
+
   const navigate = useNavigate();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const logout = () => {
-    dispath(setLogout());
+    setIsLoading(true);
+    setNotificationsCount(0);
+    navigate(`/login`);
+    dispatch(setLogout());
   };
   const state = useSelector((state) => {
-    
     return {
       isLoggedIn: state.auth.isLoggedIn,
       token: state.auth.token,
+      user_image: state.auth.user_image,
+      craft: state.auth.userInfo.craft_id,
+      noNotification: state.noti.counterNotification,
+      mood: state.Mood.mood,
     };
   });
-  
+  const mood = state.mood;
+
+  const [notificationsCount, setNotificationsCount] = useState(
+    state.noNotification
+  );
+
   let newTheme = moodstate ? "lightMood" : "darkMood";
-  const getImage = ()=>{
+  const notificationsCountApi = ()=>{
     axios
-      .get(`https://creative-minds-s3x9.onrender.com/users/`,{headers:{Authorization: state.token}})
-      .then((result)=>{
-        setCraft(result.data.user[0].craft_id);
-        setImageP(result.data.user[0].user_image);
-        console.log(result.data.user[0].user_image);
-      })
-      .catch((err)=>{
-          console.log(err);
-      })
+          .get(`https://creative-minds-s3x9.onrender.com/notifications`, {
+            headers: {
+              Authorization: state.token,
+            },
+          })
+          .then((result) => {
+            dispatch(setCounterNotification(result.data.notification));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
   }
   useEffect(()=>{
-    getImage()
- 
+    notificationsCountApi()
   },[])
   return (
-    <div className="navBar-container">
-      <Navbar collapseOnSelect expand="lg"  className="background-navbar">
-      <Navbar.Brand style={{marginLeft:"1%"}}>
-        Maintenance services <BsFillHouseFill style={{marginLeft:"10px"}}
-        onClick={()=>{
-          navigate('/')
-        }}
-        /></Navbar.Brand>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Form className="d-flex leeft-margin-search">
-              <Form.Control type="search" placeholder="Search" className="me-2"
-                aria-label="Search"/>
-              <Button variant="danger">Search</Button>
-              {/* primary secondary success  danger warning  info light dark */}
-            </Form>
-          </Nav>
-        </Navbar.Collapse>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="to-left">
-            {state.isLoggedIn?
-            <>
-            <img
-              src={imageP}
-              alt="Profile Pic"
-              style={{ width: '55px', height: '55px', borderRadius: '50%', marginRight: '10px' }}
-            />
-            <NavDropdown id="collasible-nav-dropdown">
-              <NavDropdown.Item onClick={()=>{
-                navigate("/Dashboard/provider")
-              }}>DashBoard</NavDropdown.Item>
-              {craft?
-                <NavDropdown.Item onClick={()=>{navigate("/CreatePost")}}>Create Announcement</NavDropdown.Item>
-                :
-                <NavDropdown.Item onClick={()=>{navigate("/CreateCrafts")}}>Become a service provider</NavDropdown.Item>
-              }
-              <NavDropdown.Item onClick={logout}>logout</NavDropdown.Item>
-            </NavDropdown>
-            </>
-            :
-            <Nav.Link style={{ fontSize: '18px' }} onClick={()=>{navigate(`/login`)}}>login <BsPersonCheckFill/></Nav.Link>
-            }
+    <div className= "navBar-container">
+      <div
+        className={
+          mood === "darkMood"
+            ? "darkMood navBar-container"
+            : "lightMood navBar-container"
+        }
+      >
+        <Navbar collapseOnSelect expand="lg" className="background-navbar" style={{boxShadow:"none"}}>
+          <Navbar.Brand style={{ marginLeft: "5%" }}>
+            <h3
+              className="header-logo"
+              style={{
+                display: "flex",
+                fontFamily: "Roboto",
+                letterSpacing: "0.8px",
+                lineHeight: "1",
+                fontSize: "40px",
+              }}
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              {/* <img className="imgLogoNew" src="./media/Screenshot_7.png" ></img> */}
+              Tas<h3 className="the-L-letter">L</h3>ee7
+              <span className="for-the-dot">.</span>
+            </h3>{" "}
+          </Navbar.Brand>
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{ justifyContent: "flex-end" ,marginTop:'-3vh'}}
+
+          >
+            <Nav>
+              {state.isLoggedIn ? (
+                <>
+                  <div></div>
+                  <Nav.Link
+                    style={{
+                      fontSize: "18px",
+                      marginLeft: "-30%",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      navigate(`/`);
+                    }}
+                    className="each-navbar"
+                  >
+                    Home
+                    {/* Home{" "} */}
+                  </Nav.Link>
+
+                  <Nav.Link
+                    style={{ fontSize: "18px", color: "white" }}
+                    className="each-navbar"
+                    onClick={() => {
+                      navigate("/support");
+                    }}
+                  >
+                    Support{" "}
+                  </Nav.Link>
+                  <Nav.Link
+                    style={{ fontSize: "18px", color: "white" }}
+                    onClick={() => {
+                      navigate(`/aboutus`);
+                    }}
+                    className="each-navbar darkss"
+                  >
+                    About us{" "}
+                  </Nav.Link>
+                  <NavDropdown  menualign="left" id="collasible-nav-dropdown" style={{color:"red"}}>
+                  {/* <NavDropdown.Item style={{justifyContent: "flex-end",marginLeft:"-25%",background: "none", border: "none"}}> */}
+                    
+                    <GetAllNotification/>
+                    
+                  {/* </NavDropdown.Item> */}
+
+                  </NavDropdown>
+                  <div
+                    style={{ color: "white" }}
+                    onClick={() => {
+                      navigate("/Notifications");
+                    }}
+                  >
+                    <FaBell
+                      size={22}
+                      color="gray"
+                      style={{ color: "white", marginTop: "12px" }}
+                    />
+                    
+                    <span style={{ marginTop: "12px" }}>
+                      {state.noNotification}
+                    </span>
+                  </div>
+
+                  <NavDropdown menualign="center" id="collasible-nav-dropdown"
+                  >
+                    <NavDropdown.Item
+                      onClick={() => {
+                        navigate("/Dashboard/provider");
+                      }}
+                    >
+                      <BsFillBarChartFill /> Dashboard
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        navigate("/update/profile");
+                      }}
+                    >
+                      <BsFillHouseGearFill /> Account
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        navigate("/Chat");
+                      }}
+                    >
+                      <BsChatDotsFill /> Chat AI
+                    </NavDropdown.Item>
+                    {state.craft ? (
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/CreatePost");
+                        }}
+                      >
+                        <BsFillPlusSquareFill /> Post an Ad
+                      </NavDropdown.Item>
+                    ) : (
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/CreateCraft");
+                        }}
+                      >
+                        <BsFillPlusCircleFill /> Join us
+                      </NavDropdown.Item>
+                    )}
+                    
+                    <NavDropdown.Item onClick={()=>{dispatch(setLanguage("ar"))}} >
+                      <BsSpellcheck /> Arabic 
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={logout}>
+                      <BsBoxArrowInLeft /> Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+
+                  <img
+                    src={state.user_image}
+                    alt="Profile Pic"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      marginRight: "20px",
+                    }}
+                  />
+                </>
+              ) : (
+                <div className="countainer-each-navbar">
+                  <p className="eache-navbar-1"onClick={() => {
+                      navigate(`/`);
+                    }}
+                    // style={{marginLeft:"-30%"}}
+                    >Home</p>
+                  <p className="eache-navbar-1"style={{ opacity: 0 }}>ss</p>
+                  <p className="eache-navbar-1" onClick={() => {
+                      navigate(`/register`);
+                    }}>Register</p>
+                  <p className="eache-navbar-1" style={{ opacity: 0 }}>ss</p>
+                  <p className="eache-navbar-1" onClick={() => {
+                      navigate(`/login`);
+                    }}>login</p>
+                  <p className="eache-navbar-1" style={{ opacity: 0 }}>ss</p>
+                  <p className="eache-navbar-1"onClick={() => {
+                      navigate("/support");
+                    }}>support</p>
+                  <p className="eache-navbar-1" style={{ opacity: 0 }}>ss</p>
+                  <p className="eache-navbar-1"onClick={() => {
+                      navigate(`/aboutus`);
+                    }}>About us</p>
+                  <p className="eache-navbar-1" style={{ opacity: 0 }}>ss</p>
+                  <p className="eache-navbar-1"onClick={()=>{dispatch(setLanguage("ar"))}}>Arabic</p>
+                  <p className="eache-navbar-1" style={{ opacity: 0 }}>ss</p>
+                </div>
+              )}
             </Nav>
-        </Navbar.Collapse>
-    </Navbar>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
     </div>
   );
 };

@@ -1,20 +1,4 @@
-.notification{
-    background-color: lightblue;
-    margin: 5%;
-}
-.display_flex{
-  display: flex;
-}
-.each_noti{
-  margin-left: 1%;
-  margin-bottom: 1%;
-}
-.rating {
-    font-size: 0;
-    display: inline-block;
-    position: relative;
-  }
-  
+
   .star {
     display: inline-block;
     font-size: 1.5rem;
@@ -22,18 +6,45 @@
     color: #ccc;
   }
   
-  .star:before {
+  .star:after {
     content: "\2605";
   }
-  
-  .star:hover:before,
-  .star:hover ~ .star:before,
-  .star.active:before {
+  .star:hover:after,
+  .star:hover ~ .star:after,
+  .star:active  {
     color: #FFD700;
-  }
+  } 
   .button_noti{
-    background-color:rgb(6, 157, 208);
+    background-color:#385075;
+    color: white;
+    border: none;
     border-radius: 10px;
     margin: 1%;
-    /* margin-left: 0; */
+  }
+  
+  
+  .logo img {
+  max-width: 100%;
+  height: auto;
+  }
+  
+  .logo h2 {
+  margin: 10px 0 0 0;
+  font-size: 24px;
+  font-weight: normal;
+  }
+  .noti-display{
+    width: 80%;
+    margin-left: -2%;
+    /* display: grid; */
+    /* grid-template-columns: 30% 30% 30%; */
+  }
+  .each-noti{
+    margin: 2%;
+  }
+  .div-container-notif{
+    margin-left:"-35%";
+    margin-top:"-3%";
+    background-color:rgb(215, 214, 214);
+    border-radius:"20px"
   }

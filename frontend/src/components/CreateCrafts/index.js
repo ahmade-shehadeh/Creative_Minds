@@ -1,16 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-
 import axios from "axios";
 import { setCrafts } from "../Redux/reducers/crafts";
 import Dropdown from "react-bootstrap/Dropdown";
-
+import "./style.css";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { setLogout } from "../Redux/reducers/auth";
+import { ToastContainer, toast } from "react-toastify";
 const CreateCraft = () => {
-  const [craft, setCraft] = useState({});
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [craft, setCraft] = useState({});
+  const [value, setValue] = useState("Select your maintenance");
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const state = useSelector((state) => {
+    console.log(state.auth.userInfo);
     return {
       userId: state.auth.userId,
       token: state.auth.token,
@@ -18,7 +28,6 @@ const CreateCraft = () => {
       userInfo: state.auth.userInfo,
     };
   });
-  console.log(state.userInfo);
   useEffect(() => {
     axios
       .get("https://creative-minds-s3x9.onrender.com/crafts/")
@@ -31,7 +40,6 @@ const CreateCraft = () => {
   }, []);
 
   const submitFn = () => {
-    console.log(craft);
     axios
       .put(
         `https://creative-minds-s3x9.onrender.com/crafts/${state.userId}`,
@@ -43,27 +51,43 @@ const CreateCraft = () => {
         }
       )
       .then((result) => {
-        console.log(result);
+        handleClick();
+        setTimeout(() => {
+          dispatch(setLogout());
+          navigate("/login");
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  const handleClick = () => {
+    toast.success("Craft selected Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
+  };
   return (
-    <div className="create-post-container">
-      {/* <p>i am a CreateCrafte componnent</p> */}
-      <p>please Select your maintenance from list</p>
+    <div className="create-craft-container" style={{minHeight:"80vh"}}>
+      <p>Hello Mr : {state.userInfo.first_name}</p>
+      <p>
+        This is your phone number that customers will contact you through :{" "}
+        {state.userInfo.Phone_Number}
+      </p>
+      <p>Please Select your maintenance from list : </p>
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Select your maintenance
+        <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{backgroundColor:"#223d66",borderRadius:"10px"}}>
+          {value}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {state.crafts.map((craft, id) => {
             return (
               <Dropdown.Item
                 onClick={() => {
+                  setValue(craft.name);
                   setCraft(craft);
+                  console.log(value);
                 }}
                 key={id}
               >
@@ -72,10 +96,47 @@ const CreateCraft = () => {
             );
           })}
         </Dropdown.Menu>
+        {value != "Select your maintenance" && (
+          <p style={{ marginTop: "3%" }}>
+            Please click Confirm to confirm the profession
+          </p>
+        )}
       </Dropdown>
-      <p>{state.userInfo.first_name}</p>
-      <p>{state.userInfo.Phone_number}</p>
-      <button onClick={submitFn}>Submit</button>
+      <>
+        <Button
+          variant="primary"
+          onClick={handleShow}
+          style={{ backgroundColor:"#223d66",margin: "3%", borderRadius: "30px" }}
+        >
+          Submit
+        </Button>
+
+        <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal.Header closeButton>
+            <Modal.Title>submit craft</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure of your choice : {value}</Modal.Body>
+          <Modal.Body>
+            Click on Confirm the process and you will be automatically taken to
+            the login page
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleClose();
+                submitFn();
+              }}
+            >
+              confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,14 +1,19 @@
-/* #D5E2F2  #e7ecf8  #B4C4D9 #8FA4BF */
 .container_dashboard_provider{
     display: grid;
-    grid-template-columns: 15% 83%;
+    grid-template-columns: 18% 83%;
     margin: 0.5%;
-    height: 100vh;
+    height: auto;
+}
+.container_dashboard_provider_ar{
+    display: grid;
+    grid-template-columns: 83% 18%;
+    margin: 0.5%;
+    height: auto;
 }
 .ChartComponent{
     width: 80%;
     margin-left: 6%;
-    margin-top: 10%;
+    margin-top: 7%;
 }
 .ChartComponent1{
     width: 100%;
@@ -20,26 +25,24 @@
     display: flex;
 }
 .menu{
-    background-color: #F5F5F5;
-    border-radius: 25px;
+    background: linear-gradient(to right, #2c3e55, #385075,#4e6384);
+    border-radius: 1px;
+    margin-left: -2%;
+    margin-top: -2%;
 }
 .body_container{
-    /* background-color: #e7ecf8; */
     margin: 0.5%;
     margin-top: 0;
     border-radius: 40px;
     
 }
-
 .order_info__cotainer_div{
     display: flex;
-    
 }
 .card_order_info{
     margin: 3%;
     width: 30%;
     height: 20vh;
-    /* background-color: rgb(197, 229, 240); DCEBFC*/
     background-color: #DCEBFC; 
     border-radius: 35px;
     padding: 1%;
@@ -48,39 +51,61 @@
     transform: rotateY(10deg);
 }
 .go_to{
-    /* background-color: #DCEBFC; */
-    width: 100%;
+    background-color: transparent;
+    border: none;
+    width: 80%;
     border-radius: 20px;
     border: none;
-    font-size: 35px;
+    font-size: 14px;
+    color: white;
+    margin: 3%;
+    margin-left: -5%;
 }
-h3{
+h5{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    font-size: 18px;
 }
 .number-order{
-    font-size: 80px;
+    font-size: 30px;
     margin-top: 8%;
-    
 }
-.light-red{
-    background-color: rgb(211, 211, 255);
-}
-.light-green{
-    background-color: #c3e6e1;
+.colorin{
+    background-color: #9ABEF5;
+    color:#000000;
+    font-weight: bold;
+
 }
 .light-blue{
-    background-color: rgb(251, 175, 175);
+    background-color: #aecbf7;
+    color: #000D26;
+    font-weight: bold;
+
 }
+/* ["#223D66", "#385075", "#4E6384", "#647793"] */
+
+.light-green{
+    background-color:#c2d8f9;
+    color:#000D26;
+    font-weight: bold;
+
+}
+.light-red{
+    background-color:  #D6E5FB;
+    color: #000D26;
+    font-weight: bold;
+}
+
 .ChartComponent-div{
     height: 60vh;
 }
 .hr2{
     
     border: none;
-    border-top: 2px solid gray;
-    height: 1px;
-    /* margin: 20px 0; */
+    /* border-top: 2px solid rgb(166, 32, 32); */
+    background-color: #768aaa;
+    background: linear-gradient(to right, #2c3e55, #385075,#4e6384);
+    height: 50px;
     width: 95%;
     margin-left: 2.5%;
 }
@@ -88,3 +113,18 @@ h3{
     text-align: left;
     margin-left: 27%;
 }
+.ul-menu{
+    margin-top: 4%;
+    margin-bottom: 0%;
+    color: white;
+    text-align: left;
+    margin-left: -5%;
+    font-size: 13px;
+    font-weight: bold;
+}
+li {
+    list-style-type: none;
+  }
+  /* div{
+    height: fit-content;
+  } */

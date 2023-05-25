@@ -1,7 +1,31 @@
-/* *{
-    font-size: 30px;
+
+.bodyOfCreatOrder{
+ margin-left:  17%;
+ /* position: absolute; */
+ /* transform: translate(-50%,50%); */
+ /* background-color: red; */
+ width: 100%;
 }
-.inpust-post{
-    width: 40%;
-    margin-left: 30%;
-} */
+.inpust-post >*{
+    /* display: flex; */
+    /* justify-content: center; */
+width: 100%;
+    /* align-items:center ; */
+    /* margin-left: 50%; */
+    /* background-color: red; */
+    /* text-align: center; */
+  
+    
+}
+.inpust-post2 >*{
+    /* display: flex; */
+    /* justify-content: center; */
+width: 70%;
+    /* align-items:center ; */
+    margin-left: 10%;
+    /* background-color: red; */
+    /* text-align: center; */
+  
+    
+}
+

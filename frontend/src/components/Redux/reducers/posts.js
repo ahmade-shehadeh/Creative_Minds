@@ -4,17 +4,24 @@ export const postSlice = createSlice({
   name: "post",
   initialState: {
     posts: [],
+    myPosts: [],
+    totalPages: 1,
+    currentPage: 1,
   },
   reducers: {
     setPost: (state, action) => {
       state.posts = action.payload;
+      state.totalPages=action.payload;
+      state.currentPage=action.payload;
+    },
+    setMyPost: (state, action) => {
+      state.myPosts = action.payload;
+      console.log(state.myPosts);
     },
     deletePost: (state, action) => {
-      state.posts.forEach((post, i) => {
-        if (post.id == action.payload) {
-          state.posts.splice(i, 1);
-        }
-      });
+      state.myPosts = state.myPosts.filter(
+        (post, i) => post.id != action.payload
+      );
     },
     updatePost: (state, action) => {
       state.posts.map((post, i) => {
@@ -28,5 +35,5 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setPost, deletePost, updatePost } = postSlice.actions;
+export const { setPost, deletePost, updatePost, setMyPost } = postSlice.actions;
 export default postSlice.reducers;

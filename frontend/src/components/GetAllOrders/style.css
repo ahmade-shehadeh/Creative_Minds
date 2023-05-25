@@ -1,0 +1,54 @@
+.shadow-0{
+    filter: brightness(99%);
+    color: #000;
+    font-family: Tahoma cursive;
+    font-weight: bold;
+    background-color: #223d66;
+    width: 66vw;
+    
+    
+}
+.titleTopp{
+    width: 28vw;
+    margin-left: 27vw;
+    color: #223d66;
+    font-weight: 700;
+    /* font-family: 'Times New Roman', Times, serif; */
+margin-top: 20px;
+font-family: system-ui;
+margin-bottom: -45px;
+}
+
+.all-orders-div{
+    width: 50%;
+    margin-right: 0%;
+    align-self: center;
+    
+}
+
+.allorder{
+    display: grid;
+    width: 64vw;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: space-around;
+    align-items: center;
+    column-gap: 11px;
+    font-size: 18px;
+   
+}
+.titleorder{
+   color: white; 
+font-size: 22px;
+margin-right: 29px;
+font-weight: 400;
+align-items: center;
+margin-top: -12px;
+font-family: system-ui;
+}
+.cardOrderheader{
+    font-weight: 500;
+    font-size: 18px;
+}
+.state{
+    font-size: 18px;
+}

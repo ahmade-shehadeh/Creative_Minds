@@ -1,0 +1,81 @@
+
+.inpust-post {
+
+  /* margin-left: -5%; */
+
+  display: grid;
+  grid-template-columns: 60% 33%;
+  padding-top: 3%;
+}
+.container-div {
+  grid-template-rows: 1fr 1fr 1fr;
+}
+#myButton1{
+  background-image: url("https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN");
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  border: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
+
+.user-card {
+  width: 70%;
+  margin: 5%;
+  margin-top: 0%;
+  margin-left: 15%;
+  display: flex;
+  background: linear-gradient(to right, #2c3e55, #385075, #4e6384);
+  border-radius: 25px;
+  padding: 50px 30px 50px 30px;
+}
+
+.image {
+  width: 60%;
+  height: 40vh;
+  margin-left: -100px;
+  border-radius: 25px;
+  margin-right: 30px;
+}
+
+.user-card button {
+  border-style: none;
+  border-radius: 10px;
+  margin-left: 50px;
+
+  height: 35px;
+}
+.user-card h2 {
+  color: aliceblue;
+}
+.user-card h3 {
+  color: aliceblue;
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.user-card p {
+  color: aliceblue;
+}
+.inputCreteOrder {
+  width: 100%;
+
+  text-align: left;
+  color: #223d66;
+  font-weight: 600;
+}
+.labelCreatOrder {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1vh;
+}
+.btnSubmitOrder {
+  margin-left: 16vw;
+}
+.containe-create-order {
+  margin-left: 0;
+}

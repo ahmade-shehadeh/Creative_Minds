@@ -1,4 +1,3 @@
-const { query } = require("express");
 const pool = require("../models/db");
 
 const createNewPost = (req, res) => {
@@ -59,7 +58,7 @@ const getPostsById = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: "Server Error*",
         err: err.message,
       });
     });
@@ -107,14 +106,20 @@ const deletePostById = (req, res) => {
       });
     });
 };
+
 const getAllPosts = (req, res) => {
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
   const offset = (page - 1) * limit;
-
+  // const newQ=`SELECT u.first_name, u.last_name,u.user_image,p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image ,p.id FROM posts p INNER JOIN users u ON u.id = p.user_id ORDER BY p.id ASC LIMIT $1 OFFSET $2`
+  const newQ=`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image, p.id, c.name FROM posts p INNER JOIN users u ON u.id = p.user_id INNER JOIN crafts c ON u.craft_id = c.id ORDER BY p.id ASC LIMIT $1 OFFSET $2`
   const queryString = `SELECT * FROM posts ORDER BY id ASC LIMIT $1 OFFSET $2`;
-
-  const queryStringForCount = `SELECT COUNT(*) FROM posts`;
+const query =`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.pricing, p.title, p.post_image, p.id, c.name
+FROM posts p 
+INNER JOIN users u ON u.id = p.user_id
+INNER JOIN crafts c ON u.craft_id = c.id  LIMIT $1 OFFSET $2`
+  const queryStringForCount =
+   `SELECT COUNT(*) FROM posts`;
 
   const placeholder = [limit, offset];
 
@@ -124,7 +129,7 @@ const getAllPosts = (req, res) => {
       const count = parseInt(result.rows[0].count);
       const totalPages = Math.ceil(count / limit);
       pool
-        .query(queryString, placeholder)
+        .query(query, placeholder)
         .then((result) => {
           const posts = result.rows;
           res.status(200).json({
@@ -135,6 +140,7 @@ const getAllPosts = (req, res) => {
             currentPage: page,
             posts,
           });
+         
         })
         .catch((err) => {
           res.status(500).json({
@@ -153,6 +159,82 @@ const getAllPosts = (req, res) => {
     });
 };
 
+
+const getAllPostsByPricDesc = (req, res) => {
+  
+  pool
+    .query(`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image, p.id, c.name FROM posts p INNER JOIN users u ON u.id = p.user_id INNER JOIN crafts c ON u.craft_id = c.id ORDER BY pricing DESC`)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: "get post",
+        posts: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error*",
+        err: err.message,
+      });
+    });
+};
+const getAllPostsByPricAsc = (req, res) => {
+  pool
+    .query(`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image, p.id, c.name FROM posts p INNER JOIN users u ON u.id = p.user_id INNER JOIN crafts c ON u.craft_id = c.id ORDER BY pricing ASC`)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: "get post",
+        posts: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error*",
+        err: err.message,
+      });
+    });
+};
+const getAllPostsByDate = (req, res) => {
+  pool
+    .query(`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image, p.id, c.name FROM posts p INNER JOIN users u ON u.id = p.user_id INNER JOIN crafts c ON u.craft_id = c.id ORDER BY created_on DESC`)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: "get post",
+        posts: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error*",
+        err: err.message,
+      });
+    });
+};
+const getAllPostsBySearch = (req, res) => {
+  const value = req.params.value;
+  pool
+    .query(`SELECT u.first_name, u.last_name, u.user_image, p.user_id, p.description, p.pricing, p.title, p.created_on ,p.post_image, p.id, c.name FROM posts p INNER JOIN users u ON u.id = p.user_id INNER JOIN crafts c ON u.craft_id = c.id WHERE LOWER(title) LIKE LOWER('%${value}%')`)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        mesasge: "get post",
+        posts: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error*",
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewPost,
   getPostsByuser,
@@ -160,4 +242,8 @@ module.exports = {
   deletePostById,
   getAllPosts,
   getPostsById,
+  getAllPostsByPricDesc,
+  getAllPostsByPricAsc,
+  getAllPostsByDate,
+  getAllPostsBySearch
 };

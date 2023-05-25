@@ -1,0 +1,92 @@
+
+  .star {
+    display: inline-block;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .star:after {
+    content: "\2605";
+  }
+  .star:hover:after,
+  .star:hover ~ .star:after,
+  .star:active  {
+    color: #FFD700;
+  } 
+  .button_noti{
+    background-color:#385075;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin: 1%;
+  }
+  
+  
+  .logo img {
+  max-width: 100%;
+  height: auto;
+  }
+  
+  .logo h2 {
+  margin: 10px 0 0 0;
+  font-size: 24px;
+  font-weight: normal;
+  }
+  .noti-display{
+    width: 80%;
+    margin-left: -2%;
+    /* display: grid; */
+    /* grid-template-columns: 30% 30% 30%; */
+  }
+  .each-noti{
+    margin: 2%;
+  }
+  .div-container-notif{
+    margin-left:"-35%";
+    margin-top:"-3%";
+    background-color:rgb(215, 214, 214);
+    border-radius:"20px"
+  }
+  .messages {
+    width: 95%;
+    margin: 10px auto;
+    position: relative;
+    background: #d3d8ee;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 2%;
+  }
+  
+  .messages:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 20px 10px;
+    border-color: transparent transparent #d3d8ee transparent;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    left: 15px;
+  }
+  
+  .messages-content {
+    margin: 0;
+    padding: 0;
+    /* color: #333; */
+    color: #3e4676;
+    font-size: 20px;
+    /* color: white; */
+  }
+  .center-dont-have-yet{
+    background-color: #223d66;
+    display: flex;
+    width: 60%;
+    height: 55px;
+    /* padding-top: 1%; */
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 25px;
+    margin-top: 5%;
+  }

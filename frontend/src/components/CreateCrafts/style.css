@@ -1,0 +1,18 @@
+.Submit-btn{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    box-shadow: none;
+    border: none;
+    background-color: #2F81F6;
+    border-radius: 10px;
+    color: #ffffff;
+
+}
+.create-craft-container{
+    width: 60%;
+    background-color: rgba(219, 220, 246, 0.461);
+    margin-left: 20%;
+    border-radius: 40px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

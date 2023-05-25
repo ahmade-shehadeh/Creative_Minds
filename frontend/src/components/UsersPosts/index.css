@@ -1,0 +1,19 @@
+.cards1{
+    width: 25%;
+}
+.imgecard2{
+    width: 25.5vw;
+    height: 40vh;
+}
+.container-user-posts1{
+    margin-right: 13%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    
+}
+.btn_user_post{
+    display: flex;
+    gap: 5px;
+}
