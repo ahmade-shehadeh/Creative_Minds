@@ -3,9 +3,6 @@ import { Button } from "react-bootstrap";
 import "./Chat.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import openai from 'openai'
-import os from 'os'
-require('dotenv').config();
 const Chat = () => {
   const state = useSelector((state) => {
     return {
