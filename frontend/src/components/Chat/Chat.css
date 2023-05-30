@@ -43,7 +43,8 @@
   border-radius: 100px;
   margin: 0px 10px;
   width: 160px;
-  background-color: rgb(35, 104, 252);
+  /* background-color: rgb(35, 104, 252); */
+  background-color: red;
   color: white;
   font-size: 15px;
   cursor: pointer;
