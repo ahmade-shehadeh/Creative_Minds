@@ -12,34 +12,19 @@ const Chat = () => {
       language: state.auth.language
     };
   });
- const [content, setContent] = useState("");
+ const [input, setContent] = useState("");
   const [output, setOutput] = useState("");
   const ChatNow = async () => {
-    const apiKey = process.env.API_KEY
-    const requset = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: content,
-        },
-      ],
-      temperature: 0.7,
-      max_tokens: 200,
-    };
-    axios
-      .post(`https://api.openai.com/v1/chat/completions`, requset, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${apiKey}`,
-        },
-      })
+    console.log(input);
+    await axios
+      .post  (`https://taslee7-com.onrender.com/chat/`,{input})
       .then((result) => {
         console.log(result);
-        setOutput(result.data.choices[0].message.content)
+        setOutput(result.data.result)
       })
       .catch((err) => {
-        console.log(err.response.data.error.message);
+        console.log(err.message);
+        setOutput(err.message)
       });
   };
   

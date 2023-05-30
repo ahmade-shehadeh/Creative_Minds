@@ -17,6 +17,7 @@ const stateRouter =require('./routes/state');
 const orderRouter = require("./routes/orders");
 
 const notificationsRouter = require("./routes/notifications")
+const chatRouter=require('./routes/chat')
 
 app.use(cors());
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use('/state',stateRouter)
 app.use('/review',reviewRouter);
 app.use('/role', roleRouter)
 
+app.use('/chat',chatRouter)
 
 app.use("/orders", orderRouter);
 app.use("/notifications", notificationsRouter);
