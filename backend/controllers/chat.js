@@ -26,7 +26,7 @@ const API_KEY = process.env.OPENAI_API_KEY2;
 
 
   const data = {
-    'model': 'gpt-3.5-turbo',
+    'model': 'gpt-4.0-turbo',
     'messages': [
       { "role": 'user',
        "content": input
